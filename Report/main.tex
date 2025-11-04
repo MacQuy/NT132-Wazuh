@@ -1,0 +1,99 @@
+% !TeX program = lualatex
+\documentclass[oneside]{thesis}
+\usepackage[vietnamese]{babel} 
+\usepackage{fontspec}
+\setmainfont{Times New Roman}
+\renewcommand{\normalsize}{\fontsize{13pt}{15pt}\selectfont}
+\usepackage{placeins}
+\usepackage{amsfonts}
+\usepackage{textcomp}
+\usepackage{dblfloatfix}
+\usepackage{subfig}
+\usepackage{lineno}
+\usepackage{amssymb}
+\usepackage{tabularx,booktabs}
+\usepackage{longtable, lipsum}
+\usepackage{amsmath}
+\usepackage{mathtools}
+\usepackage{graphicx}
+\usepackage{lscape}
+\usepackage{caption}
+\usepackage{hyperref}
+\usepackage[sorting=nyt]{biblatex}
+\usepackage{mathtools}
+\usepackage{lipsum}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{makecell}
+\usepackage{nopageno}
+\usepackage{enumitem}
+\linespread{1.25}
+\usepackage{ragged2e}
+\usepackage[bottom]{footmisc}
+\usepackage{hyperref}
+\usepackage{csquotes}
+\usepackage{enumitem}
+\usepackage{float}
+\usepackage[backend=biber]{biblatex}
+
+% Config reference
+% Setup hype link in thesis
+\hypersetup{urlcolor=blue,linkcolor=black,citecolor=black,colorlinks=true} 
+\DeclarePairedDelimiter\bra{\langle}{\rvert}
+\DeclarePairedDelimiter\ket{\lvert}{\rangle}
+\DeclarePairedDelimiterX\braket[2]{\langle}{\rangle}{#1 \delimsize\vert #2}
+
+
+% =========== THONG TIN SINH VIEN ===========
+
+\upperuniname{ĐẠI HỌC QUỐC GIA THÀNH PHỐ HỒ CHÍ MINH}
+\uniname{TRƯỜNG ĐẠI HỌC CÔNG NGHỆ THÔNG TIN}
+\stumajor{NGUYỄN TẤN GIA QUỐC - 23521308\\NGUYỄN NHẤT DƯƠNG - 23520353}
+\title{\bfseries NT132 - QUẢN TRỊ MẠNG VÀ HỆ THỐNG \\ TÊN ĐỀ TÀI: WAZUH MONITORING}
+\stuname{}
+\reporttime{NĂM 2025}
+\reporttype{}
+\reportplace{TP. HỒ CHÍ MINH}
+% =========== Hết phần thay đổi thông tin ===========
+% Begin thesis
+
+\begin{document}
+\coverpage
+% % Begin above main thesis
+\vspace*{-3cm}
+\renewcommand{\contentsname}{Mục lục} 
+\tableofcontents
+\cleardoublepage
+
+\vspace*{-3cm}
+\phantomsection
+\renewcommand{\listfigurename}{Danh sách hình ảnh}
+\listoffigures
+
+% Begin main thesis, start page numbering
+\setcounter{secnumdepth}{3}
+\mainmatter
+\fancyhf{}
+\fancyfoot[C]{\thepage}
+
+% Config page header
+\if @twoside
+  \fancyhead[EL,OR]{\bfseries\nouppercase\rightmark}
+\else
+  \fancyhead[R]{\bfseries\nouppercase\rightmark}
+\fi
+
+% Main chapter in thesis
+\titleformat{\chapter}[display]{\normalfont\huge\bfseries}{}{0pt}{\Huge}
+\titlespacing*{\chapter}{0pt}{-100pt}{25pt}
+\titleformat{\section}{\fontsize{14}{15}\bfseries}{\thesection}{1em}{}
+\titleformat{\subsection}{\fontsize{14}{15}\bfseries}{\thesubsection}{1em}{}
+
+
+\include{Chapter/TongQuan}
+\include{Chapter/TrienKhai}
+\include{Chapter/KetQua}
+\include{Chapter/TaiLieuThamKhao}
+
+
+\end{document}

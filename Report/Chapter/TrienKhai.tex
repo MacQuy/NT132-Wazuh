@@ -1,0 +1,69 @@
+\chapter{Giới thiệu và hướng dẫn chơi Snake Game}
+\section{Giới thiệu về SnakeGame}
+Snake Game là một trò chơi điện tử cổ điển đã xuất hiện từ những năm 1970 và trở nên nổi tiếng trên nhiều nền tảng, đặc biệt là trên các điện thoại di động Nokia vào cuối những năm 1990. Trò chơi có lối chơi đơn giản nhưng lại rất gây nghiện.
+
+“Snake” là một trò chơi không chỉ để giải trí, mà còn để nâng cao khả năng tư duy
+của người chơi thông qua việc gia tăng độ khó của trò chơi sau mỗi lần người chơi điều
+khiển con rắn ăn quả. Với lối chơi cần sự tập trung cao độ và đồ họa ưa nhìn, “Snake
+Game” sẽ là một sự lựa chọn vô cùng hoàn hảo đối với những người chơi muốn nâng
+cao khả năng tư duy và tập trung của bản thân.
+
+Đến với thế giới của “Snake Game”, người chơi sẽ trở thành một con rắn nhỏ đi
+tìm thức ăn của mình trong một không gian khép kín. Với mỗi lần người chơi chạm
+đến thức ăn của mình, bản thân người chơi sẽ tăng độ dài lên một lượng nhất định.
+Qua mỗi lần người chơi chạm đến thức ăn, độ khó của trò chơi sẽ ngày càng gia tăng.
+Vì vậy, người chơi cần phải tập trung cao độ và nâng cao khả năng tư duy, khả năng
+nhận biết trên mỗi bước tiến của bản thân. Trò chơi sẽ được hoàn thành sau khi bản
+thân con rắn của người chơi lấp đầy không gian khép kín đó.
+
+\section{Hướng dẫn chơi}
+\textbf{- Hướng dẫn kích hoạt:}
+\begin{itemize}
+        \item Nhóm mình đã mô phỏng trò chơi này trên Visual Studio Code và đã đưa lên \href{https://github.com/DuyVo-Hcm/SnakeGame}{GitHub} nên bạn hãy PULL về để trải nghiệm.
+        \item Sau khi PULL về máy, bạn tìm đến folder \textbf{\textit{src}} và mở file \textbf{\textit{main.cpp}} rồi chạy chương trình để chơi thử trò chơi (Nếu bị lỗi thư viện \textbf{\textit{raylib.h}} thì bạn có thể vào đường link "https://www.raylib.com/" để tải thư viện xuống và thử lại).
+        \item Trò chơi sẽ không tốn quá nhiều thời gian để bắt đầu.
+        \item Đối với Visual Studio Code, khi hoàn thành Debug, màn hình Console sẽ được xuất hiện. Đó cũng là nơi bạn có thể trải nghiệm trò chơi này.
+        \item Xuất hiện giao diện bắt đầu, các bạn bấm \textbf{\textit{Start}} để bắt đầu trò chơi. Khi con rắn bắt đầu di chuyển, điều đó nghĩa là trò chơi đã được kích hoạt thành công.
+\end{itemize}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=6cm]{Pic/start.jpg}
+    \caption{Giao diện khi bắt đầu trò chơi}
+\end{figure}
+    
+\textbf{- Các phím điều khiển}
+\begin{itemize}
+    \item Phím ↑: Di chuyển rắn lên.
+    \item Phím ↓: Di chuyển rắn xuống.
+    \item Phím ←: Di chuyển rắn sang trái.
+    \item Phím →: Di chuyển rắn sang phải.
+    \item Phím space: Restart (khi trò chơi kết thúc).
+    \item Phím z: Quay lại giao diện chính (khi trò chơi kết thúc).
+    \item \textbf{\textit{Lưu ý:}} con rắn không thể di chuyển lùi (ngược lại với hướng đang di chuyển).
+\end{itemize}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=6cm]{Pic/Game.png}
+    \caption{Giao diện khi bắt đầu trò chơi}
+\end{figure}
+\section{Luật chơi cơ bản}
+\begin{itemize}
+    \item \textbf{Điều khiển rắn:} Người chơi sử dụng các phím mũi tên (trái, phải, lên, xuống) để điều khiển hướng di chuyển của rắn.
+    \item \textbf{Ăn thức ăn:} Mỗi lần rắn ăn được thức ăn, thân rắn sẽ dài ra và người chơi sẽ được cộng điểm.
+    \item \textbf{Tránh va chạm:} Nếu rắn chạm vào thân của chính mình hoặc tường, trò chơi sẽ kết thúc.
+\end{itemize}
+
+
+\section{Cách tính điểm}
+\begin{itemize}
+    \item Mỗi lần ăn thức ăn, người chơi được cộng thêm một số điểm nhất định.
+    \item Điểm sẽ tăng theo độ dài của rắn.
+    \item Điểm cao nhất người chơi đạt được sẽ được lưu lại, và hiển thị khi trò chơi kết thúc.
+\end{itemize}
+
+\section{Mẹo chơi}
+\begin{itemize}
+    \item \textbf{Quan sát kỹ hướng di chuyển:} Hãy lên kế hoạch trước cho đường đi để tránh va chạm với thân rắn khi rắn trở nên dài hơn.
+    \item \textbf{Di chuyển quanh viền màn hình:} Khi thân rắn dài, di chuyển quanh viền màn hình giúp dễ dàng điều khiển hơn và tránh bị mắc kẹt.
+\end{itemize}
