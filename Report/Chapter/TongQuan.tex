@@ -1,105 +1,75 @@
-\chapter{Hợp đồng nhóm}
-\section{Tên nhóm } Nhóm 11
-\section{Thành viên nhóm}
+\chapter{Tổng quan}
 
-\begin{justify}
-\begin{tabular}{|p{5cm}|p{4.5cm}|p{4.5cm}|}
-\hline
-\textbf{Tên} & \textbf{MSSV} & \textbf{Chức vụ} \\
-\hline
-Võ Thái Duy & 23520398 & Nhóm trưởng \\
-Nguyễn Nhất Dương & 23520353 & Thành viên \\
-Đinh Nhật Huy & 21522136 & Thành viên \\
-Nguyễn Quang Khoa & 21522231 & Thành viên \\
-\hline
-\end{tabular}
-\section{Mục tiêu nhóm}
+\section{Định nghĩa / Giới thiệu}
+
+\textbf{Wazuh} là một nền tảng \textit{mã nguồn mở (open-source)} dùng để \textbf{giám sát an ninh, phát hiện xâm nhập (IDS/IPS)} và \textbf{quản lý thông tin – sự kiện an ninh (SIEM – Security Information and Event Management)}. 
+
+Nó giúp quản trị viên mạng \textbf{phát hiện, phân tích và phản ứng kịp thời} với các hành vi bất thường trong hệ thống, đồng thời hỗ trợ \textbf{kiểm tra tuân thủ (compliance)} theo các tiêu chuẩn bảo mật như PCI DSS, GDPR, HIPAA hay CIS.
+
+Wazuh được phát triển dựa trên dự án \textbf{OSSEC}, nhưng được mở rộng với nhiều cải tiến mạnh mẽ hơn về khả năng trực quan hóa dữ liệu, mở rộng quy mô và quản lý tập trung. Nền tảng này thường được tích hợp với \textbf{Elastic Stack (Elasticsearch, Logstash, Kibana)} để cung cấp \textbf{giao diện giám sát trực quan và phân tích sâu dữ liệu an ninh}.
+
+\subsection*{Mục tiêu của Wazuh}
 \begin{itemize}
-\item Nâng cao kỹ năng làm việc nhóm.
-\item Nâng cao kỹ năng sử dụng các phần mềm như Git, Trello, Slack, Latex.
-\item Cải thiện và phát triển kỹ năng lập trình C++, hướng đối tượng, và lập trình game.
-\item Đạt kết quả từ tốt trở lên trong môn Kỹ năng nghề nghiệp.
+    \item Phát hiện tấn công và hành vi bất thường trong hệ thống.
+    \item Giám sát tính toàn vẹn của tệp tin, phát hiện thay đổi trái phép.
+    \item Cung cấp báo cáo tuân thủ an toàn thông tin theo các chuẩn quốc tế.
+    \item Phản ứng tự động với sự kiện an ninh (ví dụ: chặn IP, dừng tiến trình, gửi cảnh báo).
 \end{itemize}
 
-\section{Hiệp định nhóm}
+Nhờ khả năng hoạt động linh hoạt trên nhiều nền tảng như \textbf{Windows, Linux, macOS, container (Docker, Kubernetes)}, Wazuh được sử dụng rộng rãi trong doanh nghiệp, tổ chức chính phủ và môi trường học thuật.
+
+\section{Thành phần}
+
+Một hệ thống Wazuh hoàn chỉnh gồm ba thành phần chính: \textbf{Wazuh Manager}, \textbf{Wazuh Agent}, và \textbf{Wazuh Dashboard (UI)}.
+
+\subsection{Wazuh Manager}
+Đây là \textbf{trung tâm xử lý dữ liệu} của toàn hệ thống. Manager nhận log từ các agent, giải mã – phân tích – đối chiếu quy tắc (\textit{rules}) và tạo cảnh báo khi phát hiện bất thường.
+
+Các chức năng chính:
 \begin{itemize}
-  \item Ra quyết định dựa trên sự đồng thuận của số đông, nếu nhiều ý kiến khác nhau mà có số lượng đồng thuận bằng nhau thì trưởng nhóm quyết định.
-  \item Mỗi cá nhân đều tham gia vào công việc nhóm, đề xuất ý kiến phát triển nhóm.
-  \item Trao đổi cởi mở, tôn trọng ý kiến của nhau. Lắng nghe tích cực và phản hồi mang tính xây dựng
-  \item Các công việc được giao dựa trên năng lực và sở thích của thành viên, cũng như khối lượng công việc phù hợp với thời gian làm việc.
-  \item Công việc của mỗi cá nhân cần hoàn thành đúng hạn như nhóm trưởng giao cho. Trường hợp không hoàn thành kịp phải báo sớm cho mọi người trước 1 ngày.
-  \item Tham gia đầy đủ các hoạt động chung của nhóm, đúng giờ và tích cực xây dựng nhóm.  
+    \item Xử lý và lưu trữ dữ liệu log gửi từ agent.
+    \item So khớp các sự kiện với tập quy tắc (ruleset) tích hợp sẵn hoặc do người quản trị tùy chỉnh.
+    \item Quản lý danh sách agent, gửi cấu hình và lệnh điều khiển.
+    \item Tích hợp với \textbf{Elasticsearch} để lưu trữ dữ liệu và truy vấn nhanh.
 \end{itemize}
 
-\section{Môi trường làm việc}
+\subsection{Wazuh Agent}
+Agent là \textbf{thành phần được cài trên các máy bị giám sát} (endpoint). Nó thu thập dữ liệu về:
 \begin{itemize}
-  \item Công cụ giao tiếp và cộng tác nhóm: \href{https://app.slack.com/client/T07L41M7TJ7/C07TPGXPG95}{Slack}
-  \item Công cụ phân công và quản lý công việc: \href{https://trello.com/invite/b/6721ff497b63f05b32e8e3f2/ATTIb0c40c33d82bf87f5742b2ac6f964c6aC6539F4A/snakegame}{Trello}
-  \item Công cụ soạn thảo báo cáo: \href{https://www.overleaf.com/read/vjxhsdwwznwg#9428d1}{Overleaf}
-  \item Công cụ lưu trữ mã nguồn: \href{https://github.com/DuyVo-Hcm/snakegame/}{Github}
+    \item Nhật ký hệ thống (system logs).
+    \item Tình trạng tiến trình, registry, hoạt động mạng.
+    \item Thay đổi tệp tin quan trọng (file integrity monitoring).
+    \item Cấu hình bảo mật của hệ điều hành.
 \end{itemize}
 
-\section{Vai trò các thành viên}
-\fontsize{13pt}{14pt}\selectfont
-\begin{center}
-\begin{tabular}{|m{3.5cm}|m{2cm}|m{2cm}|m{2cm}|m{2cm}|}
-\hline
-{\textbf{Công Việc}} & \textbf{Võ Thái Duy} & \textbf{Nguyễn Nhất Dương} & \textbf{Đinh Nhật Huy} & \textbf{Nguyễn Quang Khoa}\\
-\hline
-\textbf{Hợp đồng nhóm} &X &X &X &X \\
-\hline
-\textbf{Latex} &X &X & & \\
-\hline
-\textbf{Thêm thức ăn và tăng độ dài khi ăn} & &X & & \\
-\hline
-\textbf{Vẽ khung} &X & & &X \\
-\hline
-\textbf{Thêm đồ họa cho game} &X & & & \\
-\hline
-\textbf{Xử lí đồ họa} & &X & & \\
-\hline
-\textbf{Tính điểm và lưu lại điểm cao nhất} & &X & & \\
-\hline
-\textbf{Tổng hợp và sắp xếp code} & &X & & \\
-\hline
-\textbf{Giới thiệu và hướng dẫn chơi game} &X &X & & \\
-\hline
-\textbf{Tài liệu kỹ thuật trò chơi} & &X &X &X \\
-\hline
-\textbf{Mô tả quá trình làm việc nhóm} &X & & & \\
-\hline
-\textbf{Chạy thử (Tester)} & &X &X &X \\
-\hline
-\textbf{Rút ra các kỹ năng đã áp dụng khi làm đồ án} & & &X &X \\
-\hline
-\textbf{Slide báo cáo} & &X & &X \\
-\hline
-\textbf{Đánh giá hợp đồng nhóm} &X &X &X &X \\
-\hline
-\end{tabular}
-\end{center}
-\end{justify}
+Dữ liệu sau đó được mã hóa và gửi về Wazuh Manager thông qua giao thức TCP/UDP an toàn.
 
-\section{Đánh giá thành viên}
+\subsection{Wazuh Dashboard (Kibana UI)}
+Dashboard cung cấp \textbf{giao diện trực quan} giúp người quản trị theo dõi tình hình an ninh của toàn hệ thống. 
+
+Các tính năng nổi bật:
 \begin{itemize}
-    \item Cách đánh giá: tự đánh giá và đánh giá các thành viên còn lại.
+    \item Biểu đồ thống kê và hiển thị log theo thời gian thực.
+    \item Xem chi tiết từng cảnh báo, mức độ rủi ro (low – medium – high – critical).
+    \item Quản lý agent, người dùng, rule và cấu hình hệ thống.
+    \item Hỗ trợ tìm kiếm và lọc dữ liệu bằng câu lệnh Elasticsearch Query DSL.
 \end{itemize}
 
-\fontsize{13pt}{14pt}\selectfont
-\begin{center}
-\begin{tabular}{|m{3.75cm}|>{\centering\arraybackslash} m{2.25cm}|>{\centering\arraybackslash} m{2.25cm}|>{\centering\arraybackslash}m{2.25cm}|>{\centering\arraybackslash}m{2.25cm}|}
-\hline
-\multicolumn{1}{|c|}{\textbf{Tiêu chí đánh giá}} & \textbf{Tuyệt vời} & \textbf{Tốt} & \textbf{Trung bình} & \textbf{Yếu}\\
-\hline
-\textbf{Thái độ} &Sẵn sàng, nhiệt tình giúp đỡ những thành viên khác. &Có tinh thần giúp đỡ lẫn nhau trong công việc. &Ít khi liên lạc, trao đổi công việc với các thành viên. &Làm việc cá nhân, không hòa đồng với nhóm. \\
-\hline
-\textbf{Đóng góp} &Đóng góp 4-5 ý tưởng. Nhiệt tình, năng nổ với mọi hoạt động. &Đóng góp 2-3 ý tưởng. Tham gia hoạt động tích cực. &Có đóng góp 1-2 ý tưởng. Hoàn thành vai trò. &Không đóng góp cho nhóm. \\
-\hline
-\textbf{Chất lượng công việc \& Quản lý thời gian} &100\% công việc được hoàn thành đúng hạn và đúng yêu cầu đã đề ra.  &80\% công việc được hoàn thành đúng hạn và đúng yêu cầu đã đề ra.  &Công việc chất lượng 50\% yêu cầu. Hoàn thành trễ 2 ngày sau khi bị nhắc 2 lần. &Không hoàn thành công việc. Công việc không được nộp hoặc trễ 3 ngày. \\
-\hline
-\textbf{Khả năng giải quyết vấn đề} &Tích cực tìm và đề xuất 2-3 giải pháp cho các vấn đề. &Tham khảo và phân tích giải pháp của các thành viên khác. &Không đề xuất giải pháp, nhưng sẵn lòng thử các cách giải quyết của thành viên khác. &Không tham gia giải quyết vấn đề. Thành viên khác thực hiện thay. \\
-\hline
-\end{tabular}
-\end{center}
+Ngoài ra, hệ thống có thể tích hợp thêm:
+\begin{itemize}
+    \item \textbf{Filebeat / Logstash} để truyền dữ liệu log đến Elasticsearch.
+    \item \textbf{Elasticsearch} để lưu trữ, phân tích log và cảnh báo.
+    \item \textbf{Alerting module} để gửi cảnh báo qua email, Slack, webhook, v.v.
+\end{itemize}
 
-\newpage
+\section{Hoạt động}
+
+Cơ chế hoạt động của Wazuh có thể mô tả theo chu trình sau:
+
+\begin{enumerate}
+    \item \textbf{Thu thập dữ liệu (Data Collection):} Wazuh Agent thu thập log, trạng thái hệ thống, thay đổi file, tiến trình đang chạy, v.v.
+    \item \textbf{Gửi dữ liệu (Data Transmission):} Dữ liệu được mã hóa và gửi về Wazuh Manager thông qua cổng 1514 (TCP hoặc UDP).
+    \item \textbf{Phân tích dữ liệu (Data Analysis):} Manager phân tích log dựa trên tập quy tắc (ruleset). Nếu phát hiện hành vi đáng ngờ như brute-force, thay đổi file hệ thống, kết nối trái phép,… thì tạo ra cảnh báo.
+    \item \textbf{Lưu trữ và hiển thị (Storage \& Visualization):} Dữ liệu và cảnh báo được lưu vào Elasticsearch. Dashboard hiển thị kết quả trực quan giúp người quản trị dễ dàng nhận biết tình trạng an ninh hiện tại.
+    \item \textbf{Phản ứng (Response):} Hệ thống có thể thực hiện hành động tự động như khóa tài khoản, chặn IP, hoặc gửi thông báo khi phát hiện sự cố.
+\end{enumerate}
