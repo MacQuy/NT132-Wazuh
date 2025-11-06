@@ -4,6 +4,20 @@
 
 Mô hình triển khai Wazuh trong đồ án môn học được minh họa như sau:
 
+\begin{verbatim}
+                    +-------------------------+
+                    |     Wazuh Manager       |
+                    |      (Kali Linux)       |
+                    +-----------+-------------+
+                                |
+                +---------------+----------------+
+                |                                |
+        +--------------------+          +--------------------+
+        |   Windows Agent    |          |    Linux Agent     |
+        | (Máy bị giám sát)  |          | (Máy bị giám sát)  |
+        +--------------------+          +--------------------+
+\end{verbatim}
+
 \textbf{Giải thích mô hình:}
 \begin{itemize}
     \item \textbf{Máy chủ (Wazuh Manager):} Cài đặt Wazuh Manager, Elasticsearch và Dashboard. Dùng để quản lý và phân tích log.
@@ -11,40 +25,27 @@ Mô hình triển khai Wazuh trong đồ án môn học được minh họa như
     \item Các máy ảo kết nối qua cùng mạng \textbf{VMnet (NAT)} để đảm bảo liên lạc nội bộ.
 \end{itemize}
 
-%-------------------------------------------------------
-
 \section{Cài đặt}
 
 \subsection{Bước 1. Chuẩn bị}
 \begin{itemize}
-    \item Một máy chủ (Windows, Ubuntu hoặc WSL2) có thể truy cập mạng nội bộ với các máy ảo.
-    \item Cài đặt Docker (nếu muốn dùng dạng container) hoặc môi trường Ubuntu native.
+    \item Một máy chủ (Ubuntu/Kali Linux) có thể truy cập mạng nội bộ với các máy ảo.
+    \item 2 máy ảo cơ bản: \textbf{Windows} và \textbf{Linux}
 \end{itemize}
 
 \subsection{Bước 2. Cài đặt Wazuh Manager và Dashboard}
 
-Trên Ubuntu/WSL, thực hiện:
+Trên máy chủ, thực hiện:
 \begin{verbatim}
-curl -sO https://packages.wazuh.com/4.8/wazuh-install.sh
+curl -sO https://packages.wazuh.com/4.14/wazuh-install.sh
 sudo bash wazuh-install.sh -a
 \end{verbatim}
 
 Script này tự động cài đặt:
 \begin{itemize}
     \item \textbf{Wazuh Manager}
-    \item \textbf{Elasticsearch} (lưu trữ log)
-    \item \textbf{Wazuh Dashboard (Kibana UI)}
-\end{itemize}
-
-Sau khi hoàn tất, truy cập Dashboard tại:
-\begin{verbatim}
-https://<địa chỉ IP của máy chủ>:5601
-\end{verbatim}
-
-Tài khoản mặc định:
-\begin{itemize}
-    \item \textbf{Username:} admin
-    \item \textbf{Password:} hiển thị sau khi cài đặt
+    \item \textbf{Wazuh Indexer}
+    \item \textbf{Wazuh Dashboard}
 \end{itemize}
 
 \subsection{Bước 3. Cài đặt Wazuh Agent}
@@ -53,30 +54,13 @@ Tài khoản mặc định:
 \begin{enumerate}
     \item Tải agent tại trang: 
         \url{https://documentation.wazuh.com/current/installation-guide/wazuh-agent/index.html}
-    \item Trong quá trình cài đặt, nhập IP của Wazuh Manager.
-    \item Sau khi cài đặt, mở file cấu hình:
-\begin{verbatim}
-<server>
-  <address>192.168.153.1</address>
-  <port>1514</port>
-  <protocol>tcp</protocol>
-</server>
-\end{verbatim}
-    \item Khởi động dịch vụ:
-\begin{verbatim}
-net start wazuh
-\end{verbatim}
 \end{enumerate}
 
 \textbf{Trên Linux:}
 \begin{verbatim}
-curl -sO https://packages.wazuh.com/4.8/wazuh-agent-4.8.0.deb
+curl -sO https://packages.wazuh.com/4.14/wazuh-agent-4.14.0.deb
 sudo dpkg -i wazuh-agent-4.8.0.deb
 sudo nano /var/ossec/etc/ossec.conf
 sudo systemctl enable wazuh-agent
 sudo systemctl start wazuh-agent
 \end{verbatim}
-
-\subsection{Bước 4. Kiểm tra kết nối}
-Truy cập Wazuh Dashboard $\rightarrow$ mục \textbf{Agents}.  
-Nếu agent hiển thị trạng thái \textbf{Active (màu xanh)}, nghĩa là kết nối thành công. 
