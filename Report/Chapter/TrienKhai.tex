@@ -28,14 +28,16 @@ Mô hình triển khai Wazuh trong đồ án môn học được minh họa như
 \section{Cài đặt}
 
 \subsection{Bước 1. Chuẩn bị}
+
 \begin{itemize}
-    \item Một máy chủ (Ubuntu/Kali Linux) có thể truy cập mạng nội bộ với các máy ảo.
-    \item 2 máy ảo cơ bản: \textbf{Windows} và \textbf{Linux}
+    \item Một máy chủ (\textbf{Ubuntu} hoặc \textbf{Kali Linux}) có thể truy cập mạng nội bộ với các máy ảo.
+    \item Hai máy ảo: \textbf{Windows} và \textbf{Linux}, dùng để cài đặt Wazuh Agent.
 \end{itemize}
 
 \subsection{Bước 2. Cài đặt Wazuh Manager và Dashboard}
 
-Trên máy chủ, thực hiện:
+Trên máy chủ, thực hiện lệnh sau:
+
 \begin{verbatim}
 curl -sO https://packages.wazuh.com/4.14/wazuh-install.sh
 sudo bash wazuh-install.sh -a
@@ -48,19 +50,158 @@ Script này tự động cài đặt:
     \item \textbf{Wazuh Dashboard}
 \end{itemize}
 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{Pic/ServerDownload.png}
+    \caption{Quá trình tải và cài đặt trên máy chủ}
+    \label{fig:server_download}
+\end{figure}
+
+Sau khi cài đặt hoàn tất, truy cập trang đăng nhập qua địa chỉ:
+\newline
+\href{http://localhost/app/login}{\texttt{http://localhost/app/login}}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{Pic/Login.png}
+    \caption{Giao diện đăng nhập Wazuh Dashboard}
+    \label{fig:login_gui}
+\end{figure}
+
+Nhập thông tin được cung cấp trong quá trình cài đặt để truy cập vào Dashboard.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{Pic/Dashboard.png}
+    \caption{Giao diện Dashboard của Wazuh}
+    \label{fig:dashboard}
+\end{figure}
+
 \subsection{Bước 3. Cài đặt Wazuh Agent}
 
-\textbf{Trên Windows:}
-\begin{enumerate}
-    \item Tải agent tại trang: 
-        \url{https://documentation.wazuh.com/current/installation-guide/wazuh-agent/index.html}
-\end{enumerate}
+\subsubsection{Trên Windows}
 
-\textbf{Trên Linux:}
-\begin{verbatim}
-curl -sO https://packages.wazuh.com/4.14/wazuh-agent-4.14.0.deb
-sudo dpkg -i wazuh-agent-4.8.0.deb
-sudo nano /var/ossec/etc/ossec.conf
-sudo systemctl enable wazuh-agent
-sudo systemctl start wazuh-agent
-\end{verbatim}
+\paragraph{Bước 1:} Chọn hệ điều hành, kiến trúc và địa chỉ IP của server.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{Pic/Step1.png}
+    \caption{Chọn hệ điều hành, kiến trúc và địa chỉ server IP}
+    \label{fig:step1}
+\end{figure}
+
+\paragraph{Bước 2:} Đặt tên Agent và phân phối nhóm.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{Pic/Step2.png}
+    \caption{Đặt tên Agent và phân phối nhóm}
+    \label{fig:step2}
+\end{figure}
+
+\paragraph{Bước 3:} Cấu hình phía Agent.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{Pic/Step3.png}
+    \caption{Cấu hình phía Agent Windows}
+    \label{fig:step3}
+\end{figure}
+
+Trong một số trường hợp, service \texttt{wazuh-agent} không khởi động được. Khi đó cần chỉnh sửa file \textbf{ossec.conf} tại:
+\texttt{C:\textbackslash Program Files (x86)\textbackslash ossec-agent}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{Pic/FixService.png}
+    \caption{Chỉnh sửa file \texttt{ossec.conf} để khắc phục lỗi service}
+    \label{fig:fix_service}
+\end{figure}
+
+\subsubsection{Trên Linux}
+
+Thực hiện tương tự: chọn hệ điều hành, kiến trúc, server IP, đặt tên, phân phối nhóm, và sao chép command line để chạy trong shell bash:
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{Pic/LinuxDownload.png}
+    \caption{Cài đặt Wazuh Agent trên Linux}
+    \label{fig:linux_download}
+\end{figure}
+
+Sau khi hoàn tất, kết quả hiển thị như sau:
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{Pic/ResultDownload.png}
+    \caption{Kết quả cài đặt thành công Wazuh Agent}
+    \label{fig:agent_result}
+\end{figure}
+
+\section{Cấu hình}
+
+Trong phần này, tiến hành cấu hình hệ thống Wazuh nhằm thiết lập quá trình giám sát cho các máy agent chạy Windows và Linux. Toàn bộ cấu hình được thực hiện trực tiếp trên \textbf{Wazuh Dashboard} nhằm đảm bảo tính trực quan và dễ quản lý. 
+Việc tạo nhóm giúp quản lý và áp dụng cấu hình đồng bộ cho nhiều máy agent cùng lúc, tránh việc chỉnh sửa thủ công từng agent riêng lẻ.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{Pic/CreateGroup.png}
+    \caption{Tạo nhóm Wazuh}
+    \label{fig:CreateGroup}
+\end{figure}
+
+Đầu tiên, nhóm mới được tạo trong giao diện Wazuh Dashboard để gom các agent có cùng mục đích giám sát.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{Pic/AddAgents.png}
+    \caption{Thêm Agent vào nhóm Wazuh}
+    \label{fig:AddAgents}
+\end{figure}
+
+Sau đó, các máy agent (Windows và Linux) được thêm vào nhóm để áp dụng cùng một cấu hình.  
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{Pic/Config1.png}
+    \caption{Cấu hình Group kiểm tra thư mục hệ thống}
+    \label{fig:Config1}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{Pic/Config2.png}
+    \caption{Cấu hình Group cho máy Linux}
+    \label{fig:Config2}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{Pic/Config3.png}
+    \caption{Cấu hình Group cho máy Windows}
+    \label{fig:Config3}
+\end{figure}
+
+\subsection*{Giải thích cấu hình}
+
+\begin{itemize}
+    \item \textbf{File Integrity Monitoring (Syscheck):}  
+    Phần này cho phép Wazuh theo dõi sự thay đổi của các tệp hệ thống quan trọng. Cấu hình đặt tần suất kiểm tra là mỗi 3600 giây (1 giờ).  
+    Các thư mục như \texttt{/etc}, \texttt{/usr/bin}, \texttt{/usr/sbin}, \texttt{/bin}, \texttt{/sbin} trên Linux và \texttt{C:\textbackslash Windows\textbackslash System32} trên Windows được giám sát chặt chẽ.  
+    Các thư mục \texttt{/var/log}, \texttt{/tmp}, và \texttt{C:\textbackslash Windows\textbackslash Temp} được bỏ qua để tránh báo động giả do thay đổi thường xuyên.
+
+    \item \textbf{Rootcheck:}  
+    Tính năng này được bật (\texttt{<disabled>no</disabled>}) nhằm phát hiện rootkit, malware hoặc các cấu hình hệ thống đáng ngờ trên máy agent.
+
+    \item \textbf{Giám sát log hệ thống Linux:}  
+    Hai tệp log chính được thu thập là:
+    \begin{itemize}
+        \item \texttt{/var/log/auth.log}: chứa thông tin xác thực và đăng nhập.
+        \item \texttt{/var/log/syslog}: chứa thông tin hệ thống và các sự kiện dịch vụ.
+    \end{itemize}
+
+    \item \textbf{Giám sát log hệ thống Windows:}  
+    Các kênh log \texttt{Security}, \texttt{System}, và \texttt{Application} được Wazuh thu thập thông qua Event Channel, giúp phát hiện các sự kiện bảo mật, lỗi hệ thống và hoạt động của ứng dụng.
+\end{itemize}
+
+Tệp cấu hình trên đảm bảo rằng cả hai loại hệ điều hành (Windows và Linux) đều được giám sát một cách toàn diện, từ tính toàn vẹn tệp cho đến nhật ký sự kiện bảo mật.
